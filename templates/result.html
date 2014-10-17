@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1> Welcome {{ username }}! Here are the details for your current Quiz- {{ qztitle }}: </h1>
+    <ul>
+    {% if cur_qscore_obj and allqscore_obj %}
+    {% for i in cur_qscore_obj %}
+        <li> Ques {{ i.qid }}. {{ i.score }} {% if i.score %} Correct {% else %} Incorrect {% endif %}</li>
+    {% endfor %}
+    </ul>
+    <p>Your current quiz score is: {{cur_qzscore}}</p>
+
+    <h2> Cumulative results of all of your {{qzattemptid}} quiz attempts: </h2>
+    <ul>
+    {% for j in allqscore_obj %}
+        <li> Ques {{ j.qid }}. {{ j.score }} {% if j.score %} times Correct {% else %} times Incorrect {% endif %}</li>
+    {% endfor %}
+    {% else %}
+    <p> There are no scores for this Quiz </p>
+    {% endif %}
+    </ul>
+    <a href="/quizzes">Take more tests</a>
+    <br>  </br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

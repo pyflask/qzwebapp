@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1> Quiz Questions </h1>
+    <form method="post">
+    <ul>
+    {% for i in ques %}
+        <li> {{ i.qid }}. {{ i.ques_text }}?</li>
+           <ul>
+           {% for j in i.anschoices %}
+               <li><input type="checkbox" name="choices" value= "{{i.qid}},{{j.ansid}},{{j.ans_choice}}" >{{j.ans_choice}}</li> 
+           {% endfor %}
+           <br>     </br>
+           </ul>
+    {% endfor %}
+    </ul>
+    <input type="submit" name="submit" value="Submit Test">
+    </form>
+</body>
+</html>

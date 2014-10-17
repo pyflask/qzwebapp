@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1> Quiz Answers </h1>
+    <form action="/quizzes/{{qzid}}/result" method="GET">
+    <ul>
+    {% set index = 0 %}
+    {% for i in ques_obj %}
+        <li> {{ i.qid }}. {{ i.ques_text }}? </li>
+           <ul>
+           {% for j in i.anschoices %}
+               <li>{% if (j.correct and (j.ans_choice == qanslist[index][2]))%} <font color="green" > <b> {{j.ans_choice}}</b> &#10004 Correctly answered</font> {% elif (j.correct and (j.ans_choice != qanslist[index][2])) %} <font color="green"> <b> {{j.ans_choice}}</b> </font> {% elif ((j.ans_choice == qanslist[index][2]) and (j.correct == False)) %} <font color="red" > <b>{{j.ans_choice}} &#x2717 Incorrectly answered</b> </font> {% else %} {{j.ans_choice}} {% endif %}</li> 
+           {% endfor %}
+           <br>   </br>
+           </ul>
+        {% set index = index + 1 %}
+    {% endfor %}
+    </ul>
+    <input type="submit" name="submit" value="Check score">
+    </form>
+</body>
+</html>
